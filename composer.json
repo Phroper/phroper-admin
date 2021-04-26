@@ -1,6 +1,6 @@
 {
-  "name": "apisc/phroper",
-  "description": "Phroper api engine",
+  "name": "apisc/phroper-admin",
+  "description": "Admin interface for phroper",
   "authors": [
     {
       "name": "Bendegúz Cseresnyés",
@@ -10,11 +10,11 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.4.0",
-    "phpmailer/phpmailer": "^6.4"
+    "apisc/phroper": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "Phroper\\": "src/"
+      "PhroperAdmin\\": "src/"
     }
   }
 }

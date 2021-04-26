@@ -1,10 +1,5 @@
 /.htaccess
 /index.php
-/Models
-/Controllers
-/Services
-/Routers
-/public
 node_modules
-/uploads
 /vendor
+!/src/ui/build

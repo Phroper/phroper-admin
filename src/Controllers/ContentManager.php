@@ -1,10 +1,10 @@
 <?php
 
-namespace admin\Controllers;
+namespace PhroperAdmin\Controllers;
 
 use Exception;
-use Phroper;
 use Phroper\Controller;
+use Phroper\Phroper;
 
 class ContentManager extends Controller {
     public function __construct() {
