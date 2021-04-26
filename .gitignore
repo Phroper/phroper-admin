@@ -2,4 +2,3 @@
 /index.php
 node_modules
 /vendor
-!/src/ui/build
