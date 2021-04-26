@@ -2,3 +2,8 @@
 /index.php
 node_modules
 /vendor
+/Models
+/Controllers
+/Services
+/config.php
+/composer.lock
