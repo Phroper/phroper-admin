@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { connect, Field } from "formik";
 import React from "react";
+import EmbeddedArray from "./EmbeddedArray";
 import EmbeddedObject from "./EmbeddedObject";
 import FileMulti from "./FileMulti";
 import FileOne from "./FileOne";
@@ -77,4 +78,5 @@ export const FieldComponentMap = {
   file: ConnectSchemaField(FileOne),
   file_multi: FileMulti,
   embedded_object: EmbeddedObject,
+  embedded_array: EmbeddedArray,
 };

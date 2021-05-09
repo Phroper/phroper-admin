@@ -54,6 +54,7 @@ export default function EditorForm({
 }
 
 function SchemaField(props) {
+  if (props.schema.visible === false) return null;
   const EditComponent =
     FieldComponentMap[props.schema.type] ?? FieldComponentMap.default;
 
