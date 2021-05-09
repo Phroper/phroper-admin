@@ -11,12 +11,12 @@ class ContentManager extends Controller {
         parent::__construct();
 
         // register handler functions
-        $this->registerJsonHandler(":model", 'find', 'GET');
-        $this->registerJsonHandler(':model/::id', 'findOne', 'GET', -1);
-        $this->registerJsonHandler(":model", 'create', 'POST');
-        $this->registerJsonHandler(':model/::id', 'update', 'PUT', -1);
-        $this->registerJsonHandler(':model/::id', 'delete', 'DELETE', -1);
-        $this->registerJsonHandler(':model/count', 'count', 'GET');
+        $this->registerJsonHandler("/:model", 'find', 'GET');
+        $this->registerJsonHandler('/:model/::id', 'findOne', 'GET', -1);
+        $this->registerJsonHandler("/:model", 'create', 'POST');
+        $this->registerJsonHandler('/:model/::id', 'update', 'PUT', -1);
+        $this->registerJsonHandler('/:model/::id', 'delete', 'DELETE', -1);
+        $this->registerJsonHandler('/:model/count', 'count', 'GET');
     }
 
     public function findOne($params, $next) {

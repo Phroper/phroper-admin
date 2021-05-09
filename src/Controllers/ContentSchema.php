@@ -11,8 +11,8 @@ class ContentSchema extends Controller {
     public function __construct() {
         parent::__construct();
 
-        $this->registerJsonHandler("models");
-        $this->registerJsonHandler("model/:model", "model");
+        $this->registerJsonHandler("/models");
+        $this->registerJsonHandler("/model/:model", "model");
     }
 
     public function getName() {
