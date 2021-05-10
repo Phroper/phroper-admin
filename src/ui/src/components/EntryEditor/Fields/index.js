@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { connect, Field } from "formik";
 import React from "react";
+import DatePicker from "./DatePicker";
 import EmbeddedArray from "./EmbeddedArray";
 import EmbeddedObject from "./EmbeddedObject";
 import FileMulti from "./FileMulti";
@@ -79,4 +80,7 @@ export const FieldComponentMap = {
   file_multi: FileMulti,
   embedded_object: EmbeddedObject,
   embedded_array: EmbeddedArray,
+  date: ConnectSchemaField(DatePicker),
+  datetime: ConnectSchemaField(DatePicker),
+  timestamp: ConnectSchemaField(DatePicker),
 };
