@@ -97,24 +97,23 @@ function FormikWrapper({
 
   const validationSchema = GenerateYup(schema);
   return (
-    (isCreating || !contentHandler.isLoading) && (
-      <Formik
-        initialValues={isCreating ? formikInitialValues : contentHandler.result}
-        validationSchema={validationSchema}
-        onSubmit={async (data) => {
-          console.log(data);
+    <Formik
+      key={contentHandler.result && contentHandler.result[schema.primary]}
+      initialValues={isCreating ? formikInitialValues : contentHandler.result}
+      validationSchema={validationSchema}
+      onSubmit={async (data) => {
+        console.log(data);
 
-          const result = await contentHandler.run(
-            isCreating ? contentApi.create(data) : contentApi.update(data, id)
-          );
-          if (!result) return;
-          if (isCreating) {
-            history.replace("./" + result[schema.primary]);
-          }
-        }}
-      >
-        <Form>{children}</Form>
-      </Formik>
-    )
+        const result = await contentHandler.run(
+          isCreating ? contentApi.create(data) : contentApi.update(data, id)
+        );
+        if (!result) return;
+        if (isCreating) {
+          history.replace("./" + result[schema.primary]);
+        }
+      }}
+    >
+      {(isCreating || !contentHandler.isLoading) && <Form>{children}</Form>}
+    </Formik>
   );
 }
