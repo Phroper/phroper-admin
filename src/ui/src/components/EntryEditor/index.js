@@ -100,6 +100,7 @@ function FormikWrapper({
     <Formik
       key={contentHandler.result && contentHandler.result[schema.primary]}
       initialValues={isCreating ? formikInitialValues : contentHandler.result}
+      enableReinitialize={true}
       validationSchema={validationSchema}
       onSubmit={async (data) => {
         console.log(data);
