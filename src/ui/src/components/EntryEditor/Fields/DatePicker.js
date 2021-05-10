@@ -3,8 +3,8 @@ import DatePickerBase from "./DatePickerBase/index";
 
 const dateFormats = {
   date: "yyyy-MM-dd",
-  datetime: "yyyy-MM-dd hh:mm",
-  timestamp: "yyyy-MM-dd hh:mm:ss",
+  datetime: "yyyy-MM-dd HH:mm",
+  timestamp: "yyyy-MM-dd HH:mm:ss",
 };
 
 function DatePicker({ formik, schema, name, value }) {
