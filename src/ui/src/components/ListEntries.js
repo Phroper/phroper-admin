@@ -11,12 +11,37 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import moment from "moment";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import useRequest from "../utils/useRequest";
 import useRequestRunner from "../utils/useRequestRunner";
 import Pagination from "./Pagination";
+
+const displayFormatter = {
+  timestamp: (v) =>
+    v ? moment(new Date(v)).format("YYYY-MM-DD HH:mm:ss") : "-",
+  datetime: (v) =>
+    v ? moment(new Date(v)).format("YYYY-MM-DD HH:mm:ss") : "-",
+  date: (v) => (v ? moment(new Date(v)).format("YYYY-MM-DD") : "-"),
+  password: false,
+  relation_many: false,
+  file: false,
+  json: false,
+  bool: (v) => (v ? "true" : "false"),
+  default: (v, s) => {
+    if (v && typeof v === "object" && s.display) {
+      if (v[s.display] != null) return String(v[s.display]);
+      return "-";
+    }
+    if (v == null) return "-";
+    return String(v);
+  },
+  embedded_array: false,
+  file_multi: false,
+  relation_multi: false,
+};
 
 export default function ListEntries({ schema }) {
   const { model } = useParams();
@@ -41,25 +66,18 @@ export default function ListEntries({ schema }) {
     //eslint-disable-next-line
   }, [page, schema]);
 
-  const displayFormatter = {
-    //timestamp: true,
-    password: false,
-    relation_one: false,
-    relation_many: false,
-    file: false,
-    json: false,
-    bool: (v) => (v ? "true" : "false"),
-    default: (v) => String(v),
-    file_multi: false,
-  };
-
-  const names =
-    schema &&
-    Object.keys(schema.fields).filter(
+  const names = useMemo(() => {
+    if (schema && schema.listing && Array.isArray(schema.listing))
+      return schema.listing;
+    if (schema && schema.listing) return [schema.listing];
+    return Object.keys(schema.fields).filter(
       (n) =>
         displayFormatter[schema.fields[n].type] !== false &&
-        !schema.fields[n].private
+        !schema.fields[n].private &&
+        schema.fields[n].visible &&
+        schema.fields[n].listed
     );
+  }, [schema]);
 
   return (
     <Box>
@@ -109,10 +127,11 @@ export default function ListEntries({ schema }) {
                 >
                   {names.map((n) => (
                     <Td key={n}>
-                      {(
-                        displayFormatter[schema.fields[n].type] ||
-                        displayFormatter.default
-                      )(e[n])}
+                      {schema.fields[n] &&
+                        (
+                          displayFormatter[schema.fields[n].type] ||
+                          displayFormatter.default
+                        )(e[n], schema.fields[n])}
                     </Td>
                   ))}
                 </Tr>
