@@ -1,6 +1,7 @@
 import { Box, FormControl, FormLabel, Text } from "@chakra-ui/react";
+import { connect } from "formik";
+import moment from "moment";
 import React from "react";
-import { FieldComponentMap } from "./Fields";
 
 export default function EditorInfo({ schema }) {
   return (
@@ -9,30 +10,36 @@ export default function EditorInfo({ schema }) {
         Information
       </Text>
       {Object.keys(schema.fields).map((f) => (
-        <InfoField schema={schema.fields[f]} key={f} />
+        <InfoField
+          schema={schema.fields[f]}
+          key={f}
+          name={schema.fields[f].key}
+        />
       ))}
     </Box>
   );
 }
 
-function InfoField({ schema }) {
-  const EditComponent = FieldComponentMap.display_info;
-  if (schema.auto && schema.readonly)
+const InfoField = connect(function ({ name, value, formik, schema, ...props }) {
+  const v = formik.values && formik.values[name];
+  if (schema.auto && schema.readonly && schema.visible !== false)
     return (
-      EditComponent && (
-        <FormControl>
-          <FormLabel>{schema.name}</FormLabel>
-          <EditComponent
-            as={Text}
-            name={schema.key}
-            disabled={true}
-            schema={schema}
-            color="gray.800"
-            fontSize="14"
-            ml={4}
-          />
-        </FormControl>
-      )
+      <FormControl>
+        <FormLabel>{schema.name}</FormLabel>
+        <Text {...props}>
+          {(() => {
+            if (v && schema.type === "date")
+              return moment(new Date(v)).format("YYYY-MM-DD");
+            else if (v && schema.type === "datetime")
+              return moment(new Date(v)).format("YYYY-MM-DD HH:mm:ss");
+            else if (v && schema.type === "timestamp")
+              return moment(new Date(v)).format("YYYY-MM-DD HH:mm:ss");
+            else if (v && typeof v === "object") return v[schema.model_display];
+            else if (v != null) return v;
+            else return "-";
+          })()}
+        </Text>
+      </FormControl>
     );
   return null;
-}
+});

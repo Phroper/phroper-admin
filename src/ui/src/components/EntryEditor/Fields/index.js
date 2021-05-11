@@ -3,7 +3,6 @@ import {
   FormLabel,
   GridItem,
   Input,
-  Text,
   Textarea,
 } from "@chakra-ui/react";
 import { connect, Field } from "formik";
@@ -71,15 +70,6 @@ export const FieldComponentMap = {
   enum: ConnectSchemaField(Enum),
   relation_one: ConnectSchemaField(RelationOne),
   relation_many: false,
-  display_info: connect(({ name, formik, schema, ...props }) => {
-    const v = formik.values && formik.values[name];
-    return (
-      <Text {...props}>
-        {v && typeof v === "object" ? v[schema.model_display] : v}
-        {!v && "-"}
-      </Text>
-    );
-  }),
   file: ConnectSchemaField(FileOne),
   file_multi: ConnectSchemaField(FileMulti),
   embedded_object: ConnectSchemaField(EmbeddedObject),
