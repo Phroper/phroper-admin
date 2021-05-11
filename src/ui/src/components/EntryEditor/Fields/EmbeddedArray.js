@@ -1,3 +1,4 @@
+import { ArrowDownIcon, ArrowUpIcon, DeleteIcon } from "@chakra-ui/icons";
 import {
   Accordion,
   AccordionButton,
@@ -7,6 +8,7 @@ import {
   Box,
   Button,
   GridItem,
+  HStack,
 } from "@chakra-ui/react";
 import { connect } from "formik";
 import EmbeddedEditor from "./EmbeddedEditor";
@@ -28,19 +30,60 @@ function EmbeddedArray({ formik, schema, onChange, isCreating }) {
           <AccordionItem key={i}>
             <h2>
               <AccordionButton>
-                <Box flex="1" textAlign="left">
-                  {i + 1}.
-                  {/*<Button
-                    onClick={() =>
-                      formik.setFieldValue(name, [
-                        ...value.slice(0, i),
-                        ...value.slice(i + 1),
-                      ])
-                    }
-                  >
-                    del
-                </Button>*/}
-                </Box>
+                <HStack w="100%" justify="space-between">
+                  <Box flex="1" textAlign="left">
+                    {schema.display && v && typeof v === "object"
+                      ? v[schema.display]
+                      : i + 1}
+                  </Box>
+                  <Box mr={2}>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        formik.setFieldValue(name, [
+                          ...value.slice(0, i - 1),
+                          value[i],
+                          value[i - 1],
+                          ...value.slice(i + 1),
+                        ]);
+                      }}
+                      colorScheme="red"
+                      variant="ghost"
+                      disabled={i === 0}
+                    >
+                      <ArrowUpIcon />
+                    </Button>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        formik.setFieldValue(name, [
+                          ...value.slice(0, i),
+                          ...value.slice(i + 1),
+                        ]);
+                      }}
+                      colorScheme="red"
+                      variant="ghost"
+                    >
+                      <DeleteIcon />
+                    </Button>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        formik.setFieldValue(name, [
+                          ...value.slice(0, i),
+                          value[i + 1],
+                          value[i],
+                          ...value.slice(i + 2),
+                        ]);
+                      }}
+                      colorScheme="red"
+                      variant="ghost"
+                      disabled={i === value.length - 1}
+                    >
+                      <ArrowDownIcon />
+                    </Button>
+                  </Box>
+                </HStack>
                 <AccordionIcon />
               </AccordionButton>
             </h2>
