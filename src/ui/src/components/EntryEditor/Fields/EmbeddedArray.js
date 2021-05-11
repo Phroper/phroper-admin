@@ -24,7 +24,7 @@ export default function EmbeddedArray({
   value = Array.isArray(value) ? value : [];
 
   return (
-    <Box>
+    <Box pl={3} borderLeft="1px solid" borderColor="red.500">
       <Accordion allowToggle>
         {value.map((v, i) => (
           <AccordionItem key={i}>
@@ -38,6 +38,8 @@ export default function EmbeddedArray({
                   </Box>
                   <Box mr={2}>
                     <Button
+                      w="1em"
+                      h="1em"
                       onClick={(e) => {
                         e.stopPropagation();
                         formik.setFieldValue(name, [
@@ -54,6 +56,8 @@ export default function EmbeddedArray({
                       <ArrowUpIcon />
                     </Button>
                     <Button
+                      w="1em"
+                      h="1em"
                       onClick={(e) => {
                         e.stopPropagation();
                         formik.setFieldValue(name, [
@@ -67,6 +71,8 @@ export default function EmbeddedArray({
                       <DeleteIcon />
                     </Button>
                     <Button
+                      w="1em"
+                      h="1em"
                       onClick={(e) => {
                         e.stopPropagation();
                         formik.setFieldValue(name, [
