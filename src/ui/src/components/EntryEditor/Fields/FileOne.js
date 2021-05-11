@@ -14,6 +14,7 @@ export default function FileOne({ name, value, onChange }) {
   useEffect(() => {
     const v = value && typeof value == "object" ? value.id : value;
     if (v) uploadHandler.run(uploadsApi.get(v));
+    //eslint-disable-next-line
   }, [value]);
 
   const handleDrag = useCallback(
@@ -40,7 +41,7 @@ export default function FileOne({ name, value, onChange }) {
         }
       }
     },
-    [setDragOver]
+    [setDragOver, name, onChange, uploadHandler, uploadsApi]
   );
 
   return (
