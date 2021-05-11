@@ -21,12 +21,14 @@ export default function EmbeddedEditor({ schema, isCreating, prefix }) {
 
   console.log("EmbeddedEditor", fields);
 
+  const grid = schema.grid || EmbeddedEditor.grid;
+
   return (
     <Grid
       templateColumns={{
         sm: "repeat(1, 1fr)",
-        lg: "repeat(2, 1fr)",
-        "2xl": "repeat(3, 1fr)",
+        lg: `repeat(${Math.min(2, grid[0])}, 1fr)`,
+        "2xl": `repeat(${Math.min(3, grid[0])}, 1fr)`,
       }}
       flex={1}
       gap={6}
@@ -47,3 +49,5 @@ function SchemaField(props) {
   if (EditComponent) return <EditComponent {...props} />;
   return null;
 }
+
+EmbeddedEditor.grid = [3, 1];

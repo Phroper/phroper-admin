@@ -1,15 +1,13 @@
-import { Box, GridItem } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import EmbeddedEditor from "./EmbeddedEditor";
 
 export default function EmbeddedObject({ schema, isCreating }) {
-  console.log("EmbeddedSchema", schema);
   return (
-    <GridItem colSpan={4}>
-      <Box flex="1" textAlign="left" fontWeight="bold" fontSize="xl">
-        {schema.name}
-      </Box>
+    <Box pl={3} flex={1} borderLeft="1px solid" borderColor="red.500">
       <EmbeddedEditor schema={schema} isCreating={isCreating} />
-    </GridItem>
+    </Box>
   );
 }
+
+EmbeddedObject.grid = EmbeddedEditor.grid;

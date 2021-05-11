@@ -101,3 +101,5 @@ export default function FileOne({ name, value, onChange }) {
     </AspectRatio>
   );
 }
+
+FileOne.grid = [1, 2];

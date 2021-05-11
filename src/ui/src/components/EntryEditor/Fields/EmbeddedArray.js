@@ -7,13 +7,16 @@ import {
   AccordionPanel,
   Box,
   Button,
-  GridItem,
   HStack,
 } from "@chakra-ui/react";
-import { connect } from "formik";
 import EmbeddedEditor from "./EmbeddedEditor";
 
-function EmbeddedArray({ formik, schema, onChange, isCreating }) {
+export default function EmbeddedArray({
+  formik,
+  schema,
+  onChange,
+  isCreating,
+}) {
   console.log("EmbeddedSchemaArray", schema);
   const name = schema.key;
 
@@ -21,10 +24,7 @@ function EmbeddedArray({ formik, schema, onChange, isCreating }) {
   value = Array.isArray(value) ? value : [];
 
   return (
-    <GridItem colSpan={4}>
-      <Box flex="1" textAlign="left" fontWeight="bold" fontSize="xl">
-        {schema.name}
-      </Box>
+    <Box>
       <Accordion allowToggle>
         {value.map((v, i) => (
           <AccordionItem key={i}>
@@ -107,8 +107,8 @@ function EmbeddedArray({ formik, schema, onChange, isCreating }) {
       >
         +
       </Button>
-    </GridItem>
+    </Box>
   );
 }
 
-export default connect(EmbeddedArray);
+EmbeddedArray.grid = EmbeddedEditor.grid;
