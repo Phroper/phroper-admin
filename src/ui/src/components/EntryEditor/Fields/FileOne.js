@@ -1,5 +1,13 @@
-import { ArrowUpIcon } from "@chakra-ui/icons";
-import { AspectRatio, Box, Center, Image, Spinner } from "@chakra-ui/react";
+import { ArrowUpIcon, DeleteIcon } from "@chakra-ui/icons";
+import {
+  AspectRatio,
+  Box,
+  Button,
+  Center,
+  Circle,
+  Image,
+  Spinner,
+} from "@chakra-ui/react";
 import { ErrorMessage } from "formik";
 import React, { useCallback, useEffect, useState } from "react";
 import useRequest from "../../../utils/useRequest";
@@ -14,6 +22,7 @@ export default function FileOne({ name, value, onChange }) {
   useEffect(() => {
     const v = value && typeof value == "object" ? value.id : value;
     if (v) uploadHandler.run(uploadsApi.get(v));
+    else uploadHandler.setResult(null);
     //eslint-disable-next-line
   }, [value]);
 
@@ -96,8 +105,22 @@ export default function FileOne({ name, value, onChange }) {
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrag}
           position="absolute"
-          zIndex={1000}
-        />
+          display="flex"
+          flexDir="row-reverse"
+        >
+          {value && (
+            <Circle size="1.75em" m={1.5} overflow="hidden">
+              <Button
+                colorScheme="red"
+                onClick={() =>
+                  onChange && onChange({ target: { value: null, name: name } })
+                }
+              >
+                <DeleteIcon />
+              </Button>
+            </Circle>
+          )}
+        </Box>
       </Box>
     </AspectRatio>
   );

@@ -7,3 +7,4 @@ node_modules
 /Services
 /config.php
 /composer.lock
+/uploads
