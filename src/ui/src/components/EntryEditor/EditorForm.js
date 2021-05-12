@@ -1,6 +1,7 @@
 import { Box, Button, Grid, HStack } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router";
+import AlertButton from "../AlertButton";
 import { FieldComponentMap } from "./Fields";
 
 export default function EditorForm({
@@ -34,16 +35,20 @@ export default function EditorForm({
       </Grid>
       <HStack w="100%" justifyContent="space-between">
         {!isCreating && (
-          <Button
+          <AlertButton
             type="button"
             colorScheme="red"
-            onClick={async () => {
-              await contentHandler.run(contentApi.delete(id));
-              history.goBack();
-            }}
+            headerText="Deleting"
+            message="Are you sure? This action can not be undone!"
+            onClick={() =>
+              contentHandler.run(async () => {
+                await contentApi.delete(id);
+                history.goBack();
+              })
+            }
           >
             Delete
-          </Button>
+          </AlertButton>
         )}
         <Button type="submit" colorScheme="green">
           Save
