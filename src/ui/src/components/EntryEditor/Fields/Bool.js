@@ -1,7 +1,8 @@
+import { Switch } from "@chakra-ui/react";
 import React from "react";
-import { Switch } from "react-router-dom";
 
 export default function Bool({ formik, name, ...props }) {
+  console.log("renderbool");
   return (
     <Switch
       size="lg"
