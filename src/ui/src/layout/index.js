@@ -18,6 +18,7 @@ export default function Layout({ children }) {
   const schemaApi = useRequest(`/content-schema/models`);
   const schemaHandler = useRequestRunner(schemaApi.list);
   const auth = useContext(AuthConext);
+  //eslint-disable-next-line
   useEffect(schemaHandler.run, [auth.user]);
 
   return (
