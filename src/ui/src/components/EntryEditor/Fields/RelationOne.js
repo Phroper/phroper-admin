@@ -1,15 +1,15 @@
 import { Select, Skeleton } from "@chakra-ui/react";
 import React, { useContext, useEffect, useMemo } from "react";
 import useRequest from "../../../utils/useRequest";
-import { SchemaContext } from "./../../../App";
+import { SchemaContext } from "./../../../app/SchemaBackend";
 import useRequestRunner from "./../../../utils/useRequestRunner";
 
 export default function RelationOne({ schema, placeholder, value, ...props }) {
   const getSchema = useContext(SchemaContext);
-  const modelSchema = useMemo(() => getSchema(schema.model), [
-    getSchema,
-    schema,
-  ]);
+  const modelSchema = useMemo(
+    () => getSchema(schema.model),
+    [getSchema, schema]
+  );
 
   const contentHandler = useRequestRunner(
     useRequest(

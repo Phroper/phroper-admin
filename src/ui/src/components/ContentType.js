@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 import { Route, Switch, useParams } from "react-router";
-import { SchemaContext } from "../App";
+import { SchemaContext } from "./../app/SchemaBackend";
 import EntryEditor from "./EntryEditor";
 import ListEntries from "./ListEntries";
 

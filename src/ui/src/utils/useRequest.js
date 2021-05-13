@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useContext, useMemo } from "react";
 import { AuthConext } from "../auth/auth";
+import { LocationContext } from "./../app/LocationBackend";
 
 export default function useRequest(apiUrl, jwt = null) {
   const auth = useContext(AuthConext);
+  const basePath = useContext(LocationContext);
+  apiUrl = basePath + apiUrl;
 
   const handler = useMemo(() => {
     const send = async (url, body, method, headers) => {

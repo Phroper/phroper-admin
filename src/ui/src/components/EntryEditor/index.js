@@ -12,7 +12,7 @@ import EditorInfo from "./EditorInfo";
 export default function EntryEditor({ isCreating, schema }) {
   const { model, id } = useParams();
   const history = useHistory();
-  const contentApi = useRequest(`/admin/content-manager/${model}`);
+  const contentApi = useRequest(`/content-manager/${model}`);
 
   const toast = useToast();
 

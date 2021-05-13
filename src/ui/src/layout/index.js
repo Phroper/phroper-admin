@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AuthConext } from "./auth/auth";
-import useRequest from "./utils/useRequest";
-import useRequestRunner from "./utils/useRequestRunner";
+import { AuthConext } from "../auth/auth";
+import useRequest from "../utils/useRequest";
+import useRequestRunner from "../utils/useRequestRunner";
 
 export default function Layout({ children }) {
-  const schemaApi = useRequest(`/admin/content-schema/models`);
+  const schemaApi = useRequest(`/content-schema/models`);
   const schemaHandler = useRequestRunner(schemaApi.list);
   const auth = useContext(AuthConext);
   useEffect(schemaHandler.run, [auth.user]);

@@ -48,7 +48,7 @@ export default function ListEntries({ schema }) {
   const history = useHistory();
   const page = new URLSearchParams(history.location.search).get("page") || 1;
 
-  const contentApi = useRequest(`/admin/content-manager/${model}`);
+  const contentApi = useRequest(`/content-manager/${model}`);
   const [entryCount, setEntryCount] = useState(0);
 
   const contentHandler = useRequestRunner(contentApi.list, []);
