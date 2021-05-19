@@ -19,14 +19,16 @@ import { AuthConext } from "../auth/auth";
 
 export default function Login() {
   return (
-    <Container minH={10} p={0} bgColor="gray.200" mt="10vh">
-      <Text fontSize={32} p={2} bg="red.500" color="white" mb={4}>
-        Login
-      </Text>
-      <Box p={4}>
-        <LoginForm />
-      </Box>
-    </Container>
+    <Box pt="10vh">
+      <Container minH={10} p={0} bgColor="gray.200">
+        <Text fontSize={32} p={2} bg="red.500" color="white" mb={4}>
+          Login
+        </Text>
+        <Box p={4}>
+          <LoginForm />
+        </Box>
+      </Container>
+    </Box>
   );
 }
 

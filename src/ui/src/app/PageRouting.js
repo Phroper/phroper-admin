@@ -10,8 +10,12 @@ export default function PageRouting() {
 
   return (
     <Switch>
-      {!auth.user && <Redirect to="/login" />}
       <Route path="/login" component={Login} />
+      {!auth.user && (
+        <Route>
+          <Redirect to="/login" />
+        </Route>
+      )}
       <Route path="/content-type/:model" component={ContentType} />
     </Switch>
   );
