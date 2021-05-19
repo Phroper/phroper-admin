@@ -13,7 +13,7 @@ export default function RelationOne({ schema, placeholder, value, ...props }) {
 
   const contentHandler = useRequestRunner(
     useRequest(
-      `/admin/content-manager/${schema.model}${
+      `/content-manager/${schema.model}${
         value ? `?${modelSchema.primary}_sort=${value}` : ""
       }`
     ).list
@@ -27,6 +27,7 @@ export default function RelationOne({ schema, placeholder, value, ...props }) {
     () =>
       modelSchema &&
       entities &&
+      Array.isArray(entities) &&
       entities.map((e) => (
         <option key={e[modelSchema.primary]} value={e[modelSchema.primary]}>
           {e[modelSchema.display]}
