@@ -16,7 +16,7 @@ import useRequestRunner from "../../../utils/useRequestRunner";
 export default function FileOne({ name, value, onChange }) {
   const [dragOver, setDragOver] = useState(false);
 
-  const uploadsApi = useRequest("/api/file-upload");
+  const uploadsApi = useRequest("/../api/file-upload");
   const uploadHandler = useRequestRunner();
 
   useEffect(() => {
