@@ -5,23 +5,26 @@ import Layout from "../layout";
 import "./App.css";
 import LocationBackend from "./LocationBackend";
 import PageRouting from "./PageRouting";
+import PluginBackend from "./PluginBackend";
 import SchemaBackend from "./SchemaBackend";
 
 export const AppContext = React.createContext();
 
 function App() {
   return (
-    <LocationBackend>
-      <ChakraProvider>
-        <AuthBackend>
-          <SchemaBackend>
-            <Layout>
-              <PageRouting />
-            </Layout>
-          </SchemaBackend>
-        </AuthBackend>
-      </ChakraProvider>
-    </LocationBackend>
+    <PluginBackend>
+      <LocationBackend>
+        <ChakraProvider>
+          <AuthBackend>
+            <SchemaBackend>
+              <Layout>
+                <PageRouting />
+              </Layout>
+            </SchemaBackend>
+          </AuthBackend>
+        </ChakraProvider>
+      </LocationBackend>
+    </PluginBackend>
   );
 }
 

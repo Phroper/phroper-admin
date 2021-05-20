@@ -11,8 +11,8 @@ export const RemoteComponent = createRemoteComponent({ requires });
 
 const url = "/static/js/plugin.js";
 
-const HelloWorld = ({ name }) => <RemoteComponent url={url} name={name} />;
+const HelloWorld = (props) => <RemoteComponent url={url} {...props} />;
 
 export default function Main() {
-  return <HelloWorld />;
+  return null;
 }
