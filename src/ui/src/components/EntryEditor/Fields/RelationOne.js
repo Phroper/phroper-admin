@@ -18,6 +18,7 @@ export default function RelationOne({ schema, placeholder, value, ...props }) {
       }`
     ).list
   );
+  //eslint-disable-next-line
   useEffect(contentHandler.run, [schema]);
 
   if (value && typeof value === "object") value = value[schema.primary];

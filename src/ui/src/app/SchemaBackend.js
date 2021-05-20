@@ -10,6 +10,7 @@ export default function SchemaBackend({ children }) {
   const schemaApi = useRequest(`/content-schema/models`);
   const schemaHandler = useRequestRunner(schemaApi.list, null);
   const auth = useContext(AuthConext);
+  //eslint-disable-next-line
   useEffect(schemaHandler.run, [auth.user]);
 
   return (
