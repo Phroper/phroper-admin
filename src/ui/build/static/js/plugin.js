@@ -1,1 +1,86 @@
-!function(t,e){for(var n in e)t[n]=e[n]}(exports,function(t){var e={};function n(r){if(e[r])return e[r].exports;var o=e[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=t,n.c=e,n.d=function(t,e,r){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:r})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var o in t)n.d(r,o,function(e){return t[e]}.bind(null,o));return r},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=11)}([function(t,e){t.exports=require("react")},function(t,e){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,e,n){t.exports=!n(3)((function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}))},function(t,e){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,e,n){var r=n(5).f,o=Function.prototype,u=/^\s*function ([^ (]*)/;"name"in o||n(2)&&r(o,"name",{configurable:!0,get:function(){try{return(""+this).match(u)[1]}catch(t){return""}}})},function(t,e,n){var r=n(6),o=n(7),u=n(10),i=Object.defineProperty;e.f=n(2)?Object.defineProperty:function(t,e,n){if(r(t),e=u(e,!0),r(n),o)try{return i(t,e,n)}catch(t){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(t[e]=n.value),t}},function(t,e,n){var r=n(1);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,e,n){t.exports=!n(2)&&!n(3)((function(){return 7!=Object.defineProperty(n(8)("div"),"a",{get:function(){return 7}}).a}))},function(t,e,n){var r=n(1),o=n(9).document,u=r(o)&&r(o.createElement);t.exports=function(t){return u?o.createElement(t):{}}},function(t,e){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)},function(t,e,n){var r=n(1);t.exports=function(t,e){if(!r(t))return t;var n,o;if(e&&"function"==typeof(n=t.toString)&&!r(o=n.call(t)))return o;if("function"==typeof(n=t.valueOf)&&!r(o=n.call(t)))return o;if(!e&&"function"==typeof(n=t.toString)&&!r(o=n.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,e,n){"use strict";n.r(e);n(4);var r=n(0),o=n.n(r),u=function(t){var e=t.children;return o.a.createElement("h1",null,e)};e.default=function(t){var e=t.name,n=void 0===e?"World":e;return o.a.createElement(u,null,"Hello ",n,"!")}}]));
+!(function (e, t) {
+  for (var n in t) e[n] = t[n];
+})(
+  exports,
+  (function (e) {
+    var t = {};
+    function n(r) {
+      if (t[r]) return t[r].exports;
+      var u = (t[r] = { i: r, l: !1, exports: {} });
+      return e[r].call(u.exports, u, u.exports, n), (u.l = !0), u.exports;
+    }
+    return (
+      (n.m = e),
+      (n.c = t),
+      (n.d = function (e, t, r) {
+        n.o(e, t) || Object.defineProperty(e, t, { enumerable: !0, get: r });
+      }),
+      (n.r = function (e) {
+        "undefined" != typeof Symbol &&
+          Symbol.toStringTag &&
+          Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
+          Object.defineProperty(e, "__esModule", { value: !0 });
+      }),
+      (n.t = function (e, t) {
+        if ((1 & t && (e = n(e)), 8 & t)) return e;
+        if (4 & t && "object" == typeof e && e && e.__esModule) return e;
+        var r = Object.create(null);
+        if (
+          (n.r(r),
+          Object.defineProperty(r, "default", { enumerable: !0, value: e }),
+          2 & t && "string" != typeof e)
+        )
+          for (var u in e)
+            n.d(
+              r,
+              u,
+              function (t) {
+                return e[t];
+              }.bind(null, u)
+            );
+        return r;
+      }),
+      (n.n = function (e) {
+        var t =
+          e && e.__esModule
+            ? function () {
+                return e.default;
+              }
+            : function () {
+                return e;
+              };
+        return n.d(t, "a", t), t;
+      }),
+      (n.o = function (e, t) {
+        return Object.prototype.hasOwnProperty.call(e, t);
+      }),
+      (n.p = ""),
+      n((n.s = 2))
+    );
+  })([
+    function (e, t) {
+      e.exports = require("@chakra-ui/react");
+    },
+    function (e, t) {
+      e.exports = require("react");
+    },
+    function (e, t, n) {
+      "use strict";
+      n.r(t);
+      var r = n(0),
+        u = n(1),
+        o = n.n(u);
+      function i() {
+        return o.a.createElement(r.Text, null, "Plugin component render");
+      }
+      var c = {
+        routes: [{ exact: !0, path: "/plugin", component: i }],
+        menus: [{ to: "/plugin", text: "Plugin menu" }],
+        components: { PluginTest: i },
+      };
+      t.default = function (e) {
+        return (0, e.usePluginRegister)(c), null;
+      };
+    },
+  ])
+);
