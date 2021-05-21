@@ -13,11 +13,13 @@ import { Link } from "react-router-dom";
 import { AuthConext } from "../auth/auth";
 import useRequest from "../utils/useRequest";
 import useRequestRunner from "../utils/useRequestRunner";
+import { PluginContext } from "./../app/PluginBackend";
 
 export default function Layout({ children }) {
   const schemaApi = useRequest(`/content-schema/models`);
   const schemaHandler = useRequestRunner(schemaApi.list);
   const auth = useContext(AuthConext);
+  const plugins = useContext(PluginContext);
   //eslint-disable-next-line
   useEffect(schemaHandler.run, [auth.user]);
 
@@ -64,7 +66,7 @@ export default function Layout({ children }) {
               <Text fontSize={24} mb={2}>
                 Content types
               </Text>
-              <VStack pl={4} alignItems="flex-start">
+              <VStack pl={4} mb={2} alignItems="flex-start">
                 {schemaHandler.result
                   ?.filter((model) => model.visible)
                   .map((model) => (
@@ -72,6 +74,20 @@ export default function Layout({ children }) {
                       {model.name}
                     </Link>
                   ))}
+              </VStack>
+            </>
+          )}
+          {plugins.menus && (
+            <>
+              <Text fontSize={24} mb={2}>
+                Plugins
+              </Text>
+              <VStack pl={4} mb={2} alignItems="flex-start">
+                {plugins.menus.map((menu) => (
+                  <Link key={menu.to} to={`${menu.to}`}>
+                    {menu.text}
+                  </Link>
+                ))}
               </VStack>
             </>
           )}
