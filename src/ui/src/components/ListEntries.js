@@ -12,9 +12,10 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import moment from "moment";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
+import { PluginContext } from "../app/plugin-system/PluginContext";
 import useRequest from "../utils/useRequest";
 import useRequestRunner from "../utils/useRequestRunner";
 import Pagination from "./Pagination";
@@ -52,6 +53,9 @@ export default function ListEntries({ schema }) {
   const [entryCount, setEntryCount] = useState(0);
 
   const contentHandler = useRequestRunner(contentApi.list, []);
+
+  const plugins = useContext(PluginContext);
+
   useEffect(() => {
     (async () => {
       const count = await contentHandler.runError(
@@ -85,6 +89,17 @@ export default function ListEntries({ schema }) {
         {schema.name}
       </Text>
       <Skeleton isLoaded={!contentHandler.isLoading}>
+        {Object.keys(plugins.components)
+          .filter(
+            (k) =>
+              k.startsWith("ListAddon::") &&
+              plugins.components[k] &&
+              plugins.components[k].pos_before
+          )
+          .map((k) => {
+            const Component = plugins.components[k];
+            return <Component />;
+          })}
         <Pagination
           page={page}
           max={Math.ceil(entryCount / 100) || 1}
@@ -144,6 +159,17 @@ export default function ListEntries({ schema }) {
           colorScheme="red"
           onSelect={(page) => history.push("?page=" + page)}
         />
+        {Object.keys(plugins.components)
+          .filter(
+            (k) =>
+              k.startsWith("ListAddon::") &&
+              plugins.components[k] &&
+              !plugins.components[k].pos_before
+          )
+          .map((k) => {
+            const Component = plugins.components[k];
+            return <Component />;
+          })}
       </Skeleton>
     </Box>
   );

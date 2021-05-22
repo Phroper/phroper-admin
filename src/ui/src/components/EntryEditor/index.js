@@ -79,7 +79,7 @@ export default function EntryEditor({ isCreating, schema }) {
                 (k) =>
                   k.startsWith("EditorAddon::") &&
                   plugins.components[k] &&
-                  plugins.components[k].before_editor
+                  plugins.components[k].pos_before
               )
               .map((k) => {
                 const Component = plugins.components[k];
@@ -97,7 +97,7 @@ export default function EntryEditor({ isCreating, schema }) {
                 (k) =>
                   k.startsWith("EditorAddon::") &&
                   plugins.components[k] &&
-                  !plugins.components[k].before_editor
+                  !plugins.components[k].pos_before
               )
               .map((k) => {
                 const Component = plugins.components[k];
