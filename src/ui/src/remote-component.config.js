@@ -8,6 +8,7 @@ module.exports = {
     formik: require("formik"),
     moment: require("moment"),
     yup: require("yup"),
+    "phroper-admin": require("./app/plugin-system/PluginImports"),
     "framer-motion": require("framer-motion"),
     "react-datepicker": require("react-datepicker"),
     "react-dom": require("react-dom"),

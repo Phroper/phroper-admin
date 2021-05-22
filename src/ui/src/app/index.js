@@ -5,7 +5,7 @@ import Layout from "../layout";
 import "./App.css";
 import LocationBackend from "./LocationBackend";
 import PageRouting from "./PageRouting";
-import PluginBackend from "./PluginBackend";
+import PluginBackend from "./plugin-system/PluginBackend";
 import SchemaBackend from "./SchemaBackend";
 
 export const AppContext = React.createContext();

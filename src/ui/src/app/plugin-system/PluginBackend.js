@@ -3,28 +3,13 @@ import {
   createRemoteComponent,
   createRequires,
 } from "@paciolan/remote-component";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { resolve } from "../remote-component.config.js";
+import React, { useCallback, useMemo, useState } from "react";
+import { resolve } from "../../remote-component.config.js";
+import { PluginContext } from "./PluginContext";
+import { usePluginRegister } from "./usePluginRegister.js";
 
 const requires = createRequires(resolve);
 const RemoteComponent = createRemoteComponent({ requires });
-
-export const PluginContext = React.createContext();
-
-function usePluginRegister(plugin) {
-  const { registerPlugin, unregisterPlugin } = useContext(PluginContext);
-
-  useEffect(() => {
-    registerPlugin(plugin);
-    return () => unregisterPlugin(plugin);
-  }, [plugin, registerPlugin, unregisterPlugin]);
-}
 
 export default function PluginBackend({ children }) {
   const pluginUrls = ["/static/js/plugin.js"];

@@ -5,7 +5,7 @@ import Login from "../pages/Login";
 import Main from "../pages/Main";
 import { AuthConext } from "./../auth/auth";
 import ContentType from "./../components/ContentType";
-import { PluginContext } from "./PluginBackend";
+import { PluginContext } from "./plugin-system/PluginContext";
 
 export default function PageRouting() {
   const auth = useContext(AuthConext);

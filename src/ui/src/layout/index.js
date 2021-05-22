@@ -10,10 +10,10 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { PluginContext } from "../app/plugin-system/PluginContext";
 import { AuthConext } from "../auth/auth";
 import useRequest from "../utils/useRequest";
 import useRequestRunner from "../utils/useRequestRunner";
-import { PluginContext } from "./../app/PluginBackend";
 
 export default function Layout({ children }) {
   const schemaApi = useRequest(`/content-schema/models`);
