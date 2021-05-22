@@ -16,6 +16,9 @@
     "psr-4": {
       "PhroperAdmin\\": "src/",
       "": ""
-    }
+    },
+    "files": [
+      "src/index.php"
+    ]
   }
 }
