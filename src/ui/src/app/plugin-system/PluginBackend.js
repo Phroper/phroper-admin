@@ -13,6 +13,7 @@ import React, {
 import { resolve } from "../../remote-component.config.js";
 import { LocationContext } from "../LocationBackend.js";
 import useRequest from "./../../utils/useRequest";
+import { basePlugin } from "./basePlugin.js";
 import { PluginContext } from "./PluginContext";
 
 const requires = createRequires(resolve);
@@ -21,7 +22,7 @@ const RemoteComponent = createRemoteComponent({ requires });
 export default function PluginBackend({ children }) {
   // plugin storing state
   const [pluginIds, setPluginIds] = useState([]);
-  const [plugins, setPlugins] = useState([]);
+  const [plugins, setPlugins] = useState([basePlugin]);
 
   console.log(pluginIds);
   // listing available plugin ids

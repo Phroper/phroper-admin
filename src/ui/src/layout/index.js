@@ -43,7 +43,7 @@ export default function Layout({ children }) {
           overflow="auto"
         >
           <Box fontSize={40} mb={6} w="100%" textAlign="center">
-            <Link to="/">Phroper</Link>
+            <Link to="/">{plugins.components["Layout::title"]}</Link>
           </Box>
 
           {!auth.user && (
