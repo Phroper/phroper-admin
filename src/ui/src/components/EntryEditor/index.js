@@ -86,7 +86,7 @@ export default function EntryEditor({ isCreating, schema }) {
               )
               .map((k) => {
                 const Component = plugins.components[k];
-                return <Component {...editorContext} />;
+                return <Component key={k} {...editorContext} />;
               })}
             <Stack
               direction={{ sm: "column", xl: "row" }}
@@ -104,7 +104,7 @@ export default function EntryEditor({ isCreating, schema }) {
               )
               .map((k) => {
                 const Component = plugins.components[k];
-                return <Component {...editorContext} />;
+                return <Component key={k} {...editorContext} />;
               })}
           </VStack>
         </FormikWrapper>

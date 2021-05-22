@@ -107,7 +107,7 @@ export default function ListEntries({ schema }) {
           )
           .map((k) => {
             const Component = plugins.components[k];
-            return <Component {...listingContext} />;
+            return <Component key={k} {...listingContext} />;
           })}
         <Pagination
           page={page}
@@ -177,7 +177,7 @@ export default function ListEntries({ schema }) {
           )
           .map((k) => {
             const Component = plugins.components[k];
-            return <Component {...listingContext} />;
+            return <Component key={k} {...listingContext} />;
           })}
       </Skeleton>
     </Box>
