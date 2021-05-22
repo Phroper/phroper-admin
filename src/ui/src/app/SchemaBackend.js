@@ -13,18 +13,24 @@ export default function SchemaBackend({ children }) {
   //eslint-disable-next-line
   useEffect(schemaHandler.run, [auth.user]);
 
+  const displayLoading =
+    schemaHandler.isLoading ||
+    (!schemaHandler.error && auth.user && !schemaHandler.result);
+
   return (
     <>
-      {schemaHandler.isLoading && (
+      {displayLoading && (
         <Center w="100vw" h="100vh">
           <Spinner></Spinner>
         </Center>
       )}
-      {!schemaHandler.isLoading && (
+      {!displayLoading && (
         <SchemaContext.Provider
-          value={(key) =>
-            schemaHandler.result &&
-            schemaHandler.result.find((x) => x.key === key)
+          value={(key = null) =>
+            !key
+              ? schemaHandler.result
+              : schemaHandler.result &&
+                schemaHandler.result.find((x) => x.key === key)
           }
         >
           {children}

@@ -20,8 +20,8 @@ const requires = createRequires(resolve);
 const RemoteComponent = createRemoteComponent({ requires });
 
 export default function PluginBackend({ children }) {
-  // plugin storing state
-  const [pluginIds, setPluginIds] = useState([]);
+  // plugin registering states
+  const [pluginIds, setPluginIds] = useState(null);
   const [plugins, setPlugins] = useState([basePlugin]);
 
   // listing available plugin ids
@@ -30,7 +30,7 @@ export default function PluginBackend({ children }) {
     request
       .list()
       .then((r) => setPluginIds(r))
-      .catch((e) => {});
+      .catch((e) => setPluginIds([]));
     //eslint-disable-next-line
   }, []);
   const basePath = useContext(LocationContext);
@@ -68,26 +68,58 @@ export default function PluginBackend({ children }) {
       components,
       registerPlugin,
       unregisterPlugin,
+      pluginIds,
     };
-  }, [plugins, registerPlugin, unregisterPlugin]);
+  }, [plugins, registerPlugin, pluginIds, unregisterPlugin]);
+
+  // Manage plugin loading states
+  const [errors, setErrors] = useState(null);
+  const [loadedPlugins, setLoadedPlugins] = useState({});
+  const allPluginLoaded =
+    pluginIds &&
+    pluginIds.reduce((prev, key) => prev && loadedPlugins[key], true);
+
+  // Store rendered plugins
+  const pluginRender = useMemo(
+    () =>
+      pluginIds &&
+      pluginIds.map((id) => (
+        <RemoteComponent
+          key={id}
+          url={basePath + "/plugin-handler/" + id}
+          render={({ err, Component }) => {
+            if (err) {
+              console.error("Plugin loading error", id, err);
+              setTimeout(() => {
+                setErrors((errors) => ({ ...(errors || {}), [id]: err }));
+              }, 0);
+              return null;
+            }
+            setTimeout(() => {
+              setLoadedPlugins((lp) => (lp[id] ? lp : { ...lp, [id]: true }));
+            }, 0);
+            return <Component id={id} />;
+          }}
+        />
+      )),
+    [pluginIds, basePath]
+  );
 
   return (
     <PluginContext.Provider value={pluginContextValue}>
-      <Box display="none">
-        {pluginIds.map((id) => (
-          <RemoteComponent
-            key={id}
-            url={basePath + "/plugin-handler/" + id}
-            render={({ err, Component }) => {
-              if (err) {
-                console.error("Plugin loading error", id, err);
-              } else return <Component id={id} />;
-              return null;
-            }}
-          />
-        ))}
-      </Box>
-      {children}
+      <Box display="none">{pluginRender}</Box>
+      {errors && (
+        <>
+          <h1>Plugin loading errors</h1>
+          {Object.keys(errors).map((k) => (
+            <React.Fragment key={k}>
+              <h2>[{k}]</h2>
+              <pre>{errors[k].stack}</pre>
+            </React.Fragment>
+          ))}
+        </>
+      )}
+      {allPluginLoaded && !errors && children}
     </PluginContext.Provider>
   );
 }
