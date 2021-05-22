@@ -37,9 +37,10 @@ export default function Layout({ children }) {
           px={3}
           w="250px"
           top={0}
-          minH="100%"
+          h="100%"
           bg="red.600"
           color="white"
+          overflow="auto"
         >
           <Box fontSize={40} mb={6} w="100%" textAlign="center">
             <Link to="/">Phroper</Link>
@@ -77,7 +78,7 @@ export default function Layout({ children }) {
               </VStack>
             </>
           )}
-          {plugins.menus && (
+          {plugins.menus && plugins.menus.length > 0 && (
             <>
               <Text fontSize={24} mb={2}>
                 Plugins
