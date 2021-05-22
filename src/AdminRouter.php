@@ -9,5 +9,6 @@ class AdminRouter extends Router {
         parent::__construct();
         $this->add("/content-schema/", "PhroperAdmin\\Controllers\\ContentSchema");
         $this->add("/content-manager/", "PhroperAdmin\\Controllers\\ContentManager");
+        $this->add("/plugin-handler/", "PhroperAdmin\\Controllers\\PluginHandler");
     }
 }
