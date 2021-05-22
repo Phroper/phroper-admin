@@ -70,7 +70,6 @@ export default function useRequestRunner(
       try {
         if (typeof fn === "function") fn = await fn();
         if (fn instanceof Promise) fn = await fn;
-        console.log("error", fn);
         return fn;
       } catch (ex) {
         setState((s) => ({ ...s, error: ex.message }));
@@ -98,14 +97,12 @@ export default function useRequestRunner(
   const runningRef = useRef(null);
   const runStatus = useCallback(
     async (fn) => {
-      console.log(fn);
       const promise = fn instanceof Promise ? fn : (async () => await fn())();
       runningRef.current = promise;
       try {
         setState((s) => ({ ...s, isLoading: true, isSuccess: false }));
         const result = await promise;
         setState((s) => ({ ...s, isLoading: false, isSuccess: true }));
-        console.log("error", result);
         return result;
       } catch (ex) {
         if (runningRef.current === promise) runningRef.current = null;

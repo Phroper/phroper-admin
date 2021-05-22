@@ -24,7 +24,6 @@ export default function PluginBackend({ children }) {
   const [pluginIds, setPluginIds] = useState([]);
   const [plugins, setPlugins] = useState([basePlugin]);
 
-  console.log(pluginIds);
   // listing available plugin ids
   const request = useRequest("/plugin-handler");
   useEffect(() => {
@@ -80,8 +79,9 @@ export default function PluginBackend({ children }) {
             key={id}
             url={basePath + "/plugin-handler/" + id}
             render={({ err, Component }) => {
-              if (err) console.log("plugin loading error", id, err);
-              else return <Component id={id} />;
+              if (err) {
+                console.error("Plugin loading error", id, err);
+              } else return <Component id={id} />;
               return null;
             }}
           />
