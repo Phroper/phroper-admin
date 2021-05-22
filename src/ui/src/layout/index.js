@@ -46,50 +46,68 @@ export default function Layout({ children }) {
             <Link to="/">Phroper</Link>
           </Box>
 
-          {auth.user && (
+          {!auth.user && (
             <HStack mb={6}>
               <Avatar mr={4} />
               <VStack flex={1} alignItems="flex-start">
-                <Text fontSize={20}>{auth.user.username}</Text>
                 <Button
+                  as={Link}
+                  to="/login"
                   variant="link"
                   colorScheme="white"
                   onClick={auth.logout}
                 >
-                  logout
+                  login
                 </Button>
               </VStack>
             </HStack>
           )}
+          {auth.user && (
+            <>
+              <HStack mb={6}>
+                <Avatar mr={4} />
+                <VStack flex={1} alignItems="flex-start">
+                  <Text fontSize={20}>{auth.user.username}</Text>
+                  <Button
+                    variant="link"
+                    colorScheme="white"
+                    onClick={auth.logout}
+                  >
+                    logout
+                  </Button>
+                </VStack>
+              </HStack>
 
-          {schemaHandler.isSuccess && (
-            <>
-              <Text fontSize={24} mb={2}>
-                Content types
-              </Text>
-              <VStack pl={4} mb={2} alignItems="flex-start">
-                {schemaHandler.result
-                  ?.filter((model) => model.visible)
-                  .map((model) => (
-                    <Link key={model.key} to={`/content-type/${model.key}`}>
-                      {model.name}
-                    </Link>
-                  ))}
-              </VStack>
-            </>
-          )}
-          {plugins.menus && plugins.menus.length > 0 && (
-            <>
-              <Text fontSize={24} mb={2}>
-                Plugins
-              </Text>
-              <VStack pl={4} mb={2} alignItems="flex-start">
-                {plugins.menus.map((menu) => (
-                  <Link key={menu.to} to={`${menu.to}`}>
-                    {menu.text}
-                  </Link>
-                ))}
-              </VStack>
+              {schemaHandler.isSuccess && (
+                <>
+                  <Text fontSize={24} mb={2}>
+                    Content types
+                  </Text>
+                  <VStack pl={4} mb={2} alignItems="flex-start">
+                    {schemaHandler.result
+                      ?.filter((model) => model.visible)
+                      .map((model) => (
+                        <Link key={model.key} to={`/content-type/${model.key}`}>
+                          {model.name}
+                        </Link>
+                      ))}
+                  </VStack>
+                </>
+              )}
+              {plugins.menus && plugins.menus.length > 0 && (
+                <>
+                  <Text fontSize={24} mb={2}>
+                    Plugins
+                  </Text>
+                  <VStack pl={4} mb={2} alignItems="flex-start">
+                    {plugins.menus.map((menu) => (
+                      <Link key={menu.to} to={`${menu.to}`}>
+                        {menu.text}
+                      </Link>
+                    ))}
+                  </VStack>
+                </>
+              )}
             </>
           )}
         </Box>
