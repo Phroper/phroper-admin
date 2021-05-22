@@ -70,6 +70,15 @@ export default function ListEntries({ schema }) {
     //eslint-disable-next-line
   }, [page, schema]);
 
+  const listingContext = {
+    model,
+    history,
+    page,
+    contentApi,
+    contentHandler,
+    plugins,
+  };
+
   const names = useMemo(() => {
     if (schema && schema.listing && Array.isArray(schema.listing))
       return schema.listing;
@@ -98,7 +107,7 @@ export default function ListEntries({ schema }) {
           )
           .map((k) => {
             const Component = plugins.components[k];
-            return <Component />;
+            return <Component {...listingContext} />;
           })}
         <Pagination
           page={page}
@@ -168,7 +177,7 @@ export default function ListEntries({ schema }) {
           )
           .map((k) => {
             const Component = plugins.components[k];
-            return <Component />;
+            return <Component {...listingContext} />;
           })}
       </Skeleton>
     </Box>
