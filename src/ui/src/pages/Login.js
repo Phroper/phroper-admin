@@ -21,7 +21,7 @@ export default function Login() {
   return (
     <Box pt="10vh">
       <Container minH={10} p={0} bgColor="gray.200">
-        <Text fontSize={32} p={2} bg="red.500" color="white" mb={4}>
+        <Text fontSize={32} p={2} bg="brand.500" color="white" mb={4}>
           Login
         </Text>
         <Box p={4}>
@@ -95,7 +95,7 @@ function LoginForm() {
                   isLoading={isSubmitting}
                   type="submit"
                   variant="solid"
-                  colorScheme="red"
+                  colorScheme="brand"
                   children="Log in"
                 />
               )}

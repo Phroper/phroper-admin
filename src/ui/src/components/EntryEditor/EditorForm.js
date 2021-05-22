@@ -37,7 +37,7 @@ export default function EditorForm({
         {!isCreating && (
           <AlertButton
             type="button"
-            colorScheme="red"
+            colorScheme="brand"
             headerText="Deleting"
             message="Are you sure? This action can not be undone!"
             onClick={() =>

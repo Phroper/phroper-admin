@@ -72,7 +72,7 @@ export default function FileOne({ name, value, onChange }) {
             <Box
               w="100%"
               h="100%"
-              bg="red.800"
+              bg="brand.800"
               color="white"
               p={4}
               children={msg}
@@ -111,7 +111,7 @@ export default function FileOne({ name, value, onChange }) {
           {value && (
             <Circle size="1.75em" m={1.5} overflow="hidden">
               <Button
-                colorScheme="red"
+                colorScheme="brand"
                 onClick={() =>
                   onChange && onChange({ target: { value: null, name: name } })
                 }

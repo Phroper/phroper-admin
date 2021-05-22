@@ -24,7 +24,7 @@ export default function EmbeddedArray({
   value = Array.isArray(value) ? value : [];
 
   return (
-    <Box pl={3} borderLeft="1px solid" borderColor="red.500">
+    <Box pl={3} borderLeft="1px solid" borderColor="brand.500">
       <Accordion allowToggle>
         {value.map((v, i) => (
           <AccordionItem key={i}>
@@ -49,7 +49,7 @@ export default function EmbeddedArray({
                           ...value.slice(i + 1),
                         ]);
                       }}
-                      colorScheme="red"
+                      colorScheme="brand"
                       variant="ghost"
                       disabled={i === 0}
                     >
@@ -65,7 +65,7 @@ export default function EmbeddedArray({
                           ...value.slice(i + 1),
                         ]);
                       }}
-                      colorScheme="red"
+                      colorScheme="brand"
                       variant="ghost"
                     >
                       <DeleteIcon />
@@ -82,7 +82,7 @@ export default function EmbeddedArray({
                           ...value.slice(i + 2),
                         ]);
                       }}
-                      colorScheme="red"
+                      colorScheme="brand"
                       variant="ghost"
                       disabled={i === value.length - 1}
                     >
@@ -106,7 +106,7 @@ export default function EmbeddedArray({
 
       <Button
         w="100%"
-        colorScheme="red"
+        colorScheme="brand"
         variant="ghost"
         fontSize="3xl"
         onClick={() => formik.setFieldValue(`${name}[${value.length}]`, null)}

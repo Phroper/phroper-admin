@@ -6,7 +6,7 @@ export default function Bool({ formik, name, ...props }) {
   return (
     <Switch
       size="lg"
-      colorScheme="red"
+      colorScheme="brand"
       {...props}
       log={console.log(formik)}
       isChecked={formik.values && formik.values[name]}

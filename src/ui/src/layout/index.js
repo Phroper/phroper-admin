@@ -19,7 +19,7 @@ export default function Layout({ children }) {
         w="250px"
         top={0}
         h="100%"
-        bg="red.600"
+        bg="brand.600"
         color="white"
         overflow="auto"
       >

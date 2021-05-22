@@ -36,7 +36,7 @@ export default function AlertButton({
 
   return (
     <>
-      <Button colorScheme="red" {...props} onClick={() => setIsOpen(true)}>
+      <Button colorScheme="brand" {...props} onClick={() => setIsOpen(true)}>
         {children}
       </Button>
 
@@ -59,7 +59,7 @@ export default function AlertButton({
                   {cancelText}
                 </Button>
                 <Button
-                  colorScheme="red"
+                  colorScheme="brand"
                   onClick={(...p) => {
                     onClose();
                     if (onClick) onClick(...p);

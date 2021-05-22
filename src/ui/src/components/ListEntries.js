@@ -112,13 +112,13 @@ export default function ListEntries({ schema }) {
         <Pagination
           page={page}
           max={Math.ceil(entryCount / 100) || 1}
-          colorScheme="red"
+          colorScheme="brand"
           onSelect={(page) => history.push("?page=" + page)}
         />
         <HStack mb={6}>
           {schema.editable && (
             <Button
-              colorScheme="red"
+              colorScheme="brand"
               aria-label="Search database"
               onClick={() =>
                 history.push(history.location.pathname + "/create")
@@ -165,7 +165,7 @@ export default function ListEntries({ schema }) {
         <Pagination
           page={page}
           max={Math.ceil(entryCount / 100) || 1}
-          colorScheme="red"
+          colorScheme="brand"
           onSelect={(page) => history.push("?page=" + page)}
         />
         {Object.keys(plugins.components)

@@ -70,7 +70,7 @@ export default function EntryEditor({ isCreating, schema }) {
           <VStack flex={1} alignItems="stretch">
             <HStack mb={4}>
               <Button
-                colorScheme="red"
+                colorScheme="brand"
                 onClick={() => history.goBack()}
                 variant="link"
               >
