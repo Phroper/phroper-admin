@@ -3,19 +3,37 @@ import {
   createRemoteComponent,
   createRequires,
 } from "@paciolan/remote-component";
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { resolve } from "../../remote-component.config.js";
+import { LocationContext } from "../LocationBackend.js";
+import useRequest from "./../../utils/useRequest";
 import { PluginContext } from "./PluginContext";
-import { usePluginRegister } from "./usePluginRegister.js";
 
 const requires = createRequires(resolve);
 const RemoteComponent = createRemoteComponent({ requires });
 
 export default function PluginBackend({ children }) {
-  const pluginUrls = ["/static/js/plugin.js"];
-
   // plugin storing state
+  const [pluginIds, setPluginIds] = useState([]);
   const [plugins, setPlugins] = useState([]);
+
+  console.log(pluginIds);
+  // listing available plugin ids
+  const request = useRequest("/plugin-handler");
+  useEffect(() => {
+    request
+      .list()
+      .then((r) => setPluginIds(r))
+      .catch((e) => {});
+    //eslint-disable-next-line
+  }, []);
+  const basePath = useContext(LocationContext);
 
   // Function to add plugin to state
   const registerPlugin = useCallback(
@@ -56,11 +74,11 @@ export default function PluginBackend({ children }) {
   return (
     <PluginContext.Provider value={pluginContextValue}>
       <Box display="none">
-        {pluginUrls.map((url) => (
+        {pluginIds.map((id) => (
           <RemoteComponent
-            key={url}
-            url={url}
-            usePluginRegister={usePluginRegister}
+            key={id}
+            url={basePath + "/plugin-handler/" + id}
+            id={id}
           />
         ))}
       </Box>

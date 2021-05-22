@@ -12,8 +12,8 @@ export const AppContext = React.createContext();
 
 function App() {
   return (
-    <PluginBackend>
-      <LocationBackend>
+    <LocationBackend>
+      <PluginBackend>
         <ChakraProvider>
           <AuthBackend>
             <SchemaBackend>
@@ -23,8 +23,8 @@ function App() {
             </SchemaBackend>
           </AuthBackend>
         </ChakraProvider>
-      </LocationBackend>
-    </PluginBackend>
+      </PluginBackend>
+    </LocationBackend>
   );
 }
 
