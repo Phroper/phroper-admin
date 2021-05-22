@@ -1,4 +1,4 @@
-import { Box, Button, Grid, HStack } from "@chakra-ui/react";
+import { Button, Grid, HStack, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router";
 import AlertButton from "../AlertButton";
@@ -14,7 +14,7 @@ export default function EditorForm({
   const history = useHistory();
 
   return (
-    <Box p={4} bg="white" flex={1}>
+    <VStack p={4} bg="white" flex={1} alignItems="stretch">
       <Grid
         templateColumns={{
           sm: "repeat(1, 1fr)",
@@ -54,7 +54,7 @@ export default function EditorForm({
           Save
         </Button>
       </HStack>
-    </Box>
+    </VStack>
   );
 }
 

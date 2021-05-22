@@ -1,10 +1,19 @@
-import { Box, Button, HStack, Stack, Text, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Stack,
+  Text,
+  useToast,
+  VStack,
+} from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import { default as React, useEffect, useMemo } from "react";
+import { default as React, useContext, useEffect, useMemo } from "react";
 import { useParams } from "react-router";
 import { useHistory } from "react-router-dom";
 import GenerateYup from "../../utils/GenerateYup";
 import useRequest from "../../utils/useRequest";
+import { PluginContext } from "./../../app/plugin-system/PluginContext";
 import useRequestRunner from "./../../utils/useRequestRunner";
 import EditorForm from "./EditorForm";
 import EditorInfo from "./EditorInfo";
@@ -30,6 +39,8 @@ export default function EntryEditor({ isCreating, schema }) {
     //eslint-disable-next-line
   }, [contentHandler.error, contentHandler.resetError, toast]);
 
+  const plugins = useContext(PluginContext);
+
   useEffect(() => {
     if (!isCreating) contentHandler.run();
     //eslint-disable-next-line
@@ -53,23 +64,46 @@ export default function EntryEditor({ isCreating, schema }) {
             : schema.name}
         </Text>
         <FormikWrapper {...editorContext}>
-          <HStack mb={6}>
-            <Button
-              colorScheme="red"
-              onClick={() => history.goBack()}
-              variant="link"
+          <VStack flex={1} alignItems="stretch">
+            <HStack mb={4}>
+              <Button
+                colorScheme="red"
+                onClick={() => history.goBack()}
+                variant="link"
+              >
+                Back
+              </Button>
+            </HStack>
+            {Object.keys(plugins.components)
+              .filter(
+                (k) =>
+                  k.startsWith("EditorAddon::") &&
+                  plugins.components[k] &&
+                  plugins.components[k].before_editor
+              )
+              .map((k) => {
+                const Component = plugins.components[k];
+                return <Component />;
+              })}
+            <Stack
+              direction={{ sm: "column", xl: "row" }}
+              alignItems={{ base: "stretch" }}
             >
-              Back
-            </Button>
-          </HStack>
-          <Stack
-            flex={1}
-            direction={{ sm: "column", xl: "row" }}
-            alignItems={{ sm: "stretch", xl: "flex-start" }}
-          >
-            <EditorForm {...editorContext} />
-            {!isCreating && <EditorInfo {...editorContext} />}
-          </Stack>
+              <EditorForm {...editorContext} />
+              {!isCreating && <EditorInfo {...editorContext} />}
+            </Stack>
+            {Object.keys(plugins.components)
+              .filter(
+                (k) =>
+                  k.startsWith("EditorAddon::") &&
+                  plugins.components[k] &&
+                  !plugins.components[k].before_editor
+              )
+              .map((k) => {
+                const Component = plugins.components[k];
+                return <Component />;
+              })}
+          </VStack>
         </FormikWrapper>
       </Box>
     </>
