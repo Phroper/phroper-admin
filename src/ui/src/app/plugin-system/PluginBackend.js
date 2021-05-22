@@ -79,7 +79,11 @@ export default function PluginBackend({ children }) {
           <RemoteComponent
             key={id}
             url={basePath + "/plugin-handler/" + id}
-            id={id}
+            render={({ err, Component }) => {
+              if (err) console.log("plugin loading error", id, err);
+              else return <Component id={id} />;
+              return null;
+            }}
           />
         ))}
       </Box>
