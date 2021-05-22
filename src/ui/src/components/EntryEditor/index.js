@@ -19,13 +19,20 @@ import EditorForm from "./EditorForm";
 import EditorInfo from "./EditorInfo";
 
 export default function EntryEditor({ isCreating, schema }) {
-  const { model, id } = useParams();
   const history = useHistory();
+  const { model, id } = useParams();
+  const plugins = useContext(PluginContext);
+
+  // Api communication
   const contentApi = useRequest(`/content-manager/${model}`);
+  const contentHandler = useRequestRunner(() => contentApi.get(id), {});
+  useEffect(() => {
+    if (!isCreating) contentHandler.run();
+    //eslint-disable-next-line
+  }, [isCreating, id]);
 
+  // Toast notification handling
   const toast = useToast();
-
-  const contentHandler = useRequestRunner(() => contentApi.get(id), []);
   useEffect(() => {
     if (!contentHandler.error) return;
     toast({
@@ -39,18 +46,14 @@ export default function EntryEditor({ isCreating, schema }) {
     //eslint-disable-next-line
   }, [contentHandler.error, contentHandler.resetError, toast]);
 
-  const plugins = useContext(PluginContext);
-
-  useEffect(() => {
-    if (!isCreating) contentHandler.run();
-    //eslint-disable-next-line
-  }, [isCreating, id]);
-
+  // Collected data for editor and addons
   const editorContext = {
     isCreating,
     history,
     schema,
     id,
+    model,
+    toast,
     contentHandler,
     contentApi,
   };
@@ -83,7 +86,7 @@ export default function EntryEditor({ isCreating, schema }) {
               )
               .map((k) => {
                 const Component = plugins.components[k];
-                return <Component />;
+                return <Component {...editorContext} />;
               })}
             <Stack
               direction={{ sm: "column", xl: "row" }}
@@ -101,7 +104,7 @@ export default function EntryEditor({ isCreating, schema }) {
               )
               .map((k) => {
                 const Component = plugins.components[k];
-                return <Component />;
+                return <Component {...editorContext} />;
               })}
           </VStack>
         </FormikWrapper>
