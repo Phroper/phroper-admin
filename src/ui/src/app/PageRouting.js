@@ -21,9 +21,11 @@ export default function PageRouting() {
         </Route>
       )}
       <Route path="/content-type/:model" component={ContentType} />
-      {plugins.routes.map((r) => (
-        <Route {...r} />
-      ))}
+      <>
+        {plugins.routes.map((r, i) => (
+          <Route {...r} key={r.path} />
+        ))}
+      </>
     </Switch>
   );
 }
