@@ -130,7 +130,7 @@ export default function ListEntries({ schema }) {
             colorScheme="brand"
             onSelect={(page) => history.push("?page=" + page)}
           />
-          <Table mb={6}>
+          <Table mb={4}>
             <Thead>
               <Tr>
                 {names.map((n) => (
