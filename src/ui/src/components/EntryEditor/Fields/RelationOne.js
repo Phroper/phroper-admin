@@ -21,7 +21,7 @@ export default function RelationOne({ schema, placeholder, value, ...props }) {
   //eslint-disable-next-line
   useEffect(contentHandler.run, [schema]);
 
-  if (value && typeof value === "object") value = value[schema.primary];
+  if (value && typeof value === "object") value = value[modelSchema.primary];
 
   const entities = contentHandler.result;
   const optionList = useMemo(
