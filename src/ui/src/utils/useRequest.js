@@ -9,12 +9,21 @@ export default function useRequest(apiUrl, jwt = null) {
   apiUrl = basePath + apiUrl;
 
   const handler = useMemo(() => {
-    const send = async (url, body, method, headers) => {
+    const send = async (url, body, method, query, headers) => {
       try {
+        const finalQuery = {};
+        if (query && typeof query == "object")
+          Object.keys(query).forEach((k) => {
+            if (typeof query[k] === "boolean") finalQuery[k] = query[k] ? 1 : 0;
+            else if (query[k] === null) finalQuery[k + "_null"] = 1;
+            else finalQuery[k] = query[k];
+          });
+
         const response = await axios({
           method,
           url,
           data: body,
+          params: finalQuery,
           headers:
             jwt || auth?.jwt
               ? { Authorization: "Bearer " + (jwt || auth?.jwt), ...headers }
@@ -37,8 +46,7 @@ export default function useRequest(apiUrl, jwt = null) {
     };
 
     return {
-      list: async (page = null) =>
-        send(apiUrl + (page ? `?page=${page}` : ""), null, "GET"),
+      list: async (query) => send(apiUrl, null, "GET", query),
       get: async (id) => send(apiUrl + "/" + id, null, "GET"),
       create: async (data) => send(apiUrl, data, "POST"),
       update: async (data, id = null) =>
@@ -49,8 +57,8 @@ export default function useRequest(apiUrl, jwt = null) {
           null,
           "DELETE"
         ),
-      send: async (url, data, method = "GET", headers = {}) =>
-        send(apiUrl + "/" + url, data, method, headers),
+      send: async (url, data, method = "GET", query = null, headers = {}) =>
+        send(apiUrl + "/" + url, data, method, query, headers),
     };
   }, [apiUrl, auth, jwt]);
 
