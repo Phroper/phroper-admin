@@ -47,7 +47,7 @@ export default function useRequest(apiUrl, jwt = null) {
 
     return {
       list: async (query) => send(apiUrl, null, "GET", query),
-      get: async (id) => send(apiUrl + "/" + id, null, "GET"),
+      get: async (id, query) => send(apiUrl + "/" + id, null, "GET", query),
       create: async (data) => send(apiUrl, data, "POST"),
       update: async (data, id = null) =>
         send(apiUrl + "/" + (id == null ? data.id : id), data, "PUT"),
