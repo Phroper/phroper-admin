@@ -5,7 +5,7 @@ import React from "react";
 
 export default function EditorInfo({ schema }) {
   return (
-    <Box minW="350px" p={4} bg="white">
+    <Box minW="350px" p={4} bg="white" shadow="md">
       <Text fontWeight="bold" fontSize={20}>
         Information
       </Text>

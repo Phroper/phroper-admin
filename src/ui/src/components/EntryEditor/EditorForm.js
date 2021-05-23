@@ -14,7 +14,7 @@ export default function EditorForm({
   const history = useHistory();
 
   return (
-    <VStack p={4} bg="white" flex={1} alignItems="stretch">
+    <VStack p={4} bg="white" shadow="md" flex={1} alignItems="stretch">
       <Grid
         templateColumns={{
           sm: "repeat(1, 1fr)",
