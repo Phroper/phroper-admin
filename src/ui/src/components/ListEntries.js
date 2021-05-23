@@ -123,7 +123,7 @@ export default function ListEntries({ schema }) {
             </Button>
           )}
         </HStack>
-        <Box bg="white" shadow="md" p={4}>
+        <Box bg="white" shadow="md" p={4} overflowY="auto">
           <Pagination
             page={page}
             max={Math.ceil(entryCount / 100) || 1}
