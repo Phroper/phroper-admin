@@ -61,14 +61,14 @@ export default function EntryEditor({ isCreating, schema }) {
   return (
     <>
       <Box>
-        <Text fontSize={40} mb={4}>
+        <Text fontSize={40}>
           {contentHandler.result && !isCreating
             ? `${contentHandler.result[schema.display]} (${schema.name})`
             : schema.name}
         </Text>
         <FormikWrapper {...editorContext}>
-          <VStack flex={1} alignItems="stretch">
-            <HStack mb={4}>
+          <VStack py={4} flex={1} alignItems="stretch" spacing={4}>
+            <HStack>
               <Button
                 colorScheme="brand"
                 onClick={() => history.goBack()}
@@ -91,6 +91,7 @@ export default function EntryEditor({ isCreating, schema }) {
             <Stack
               direction={{ sm: "column", xl: "row" }}
               alignItems={{ base: "stretch" }}
+              spacing={4}
             >
               <EditorForm {...editorContext} />
               {!isCreating && <EditorInfo {...editorContext} />}

@@ -11,7 +11,7 @@ export default function Layout({ children }) {
   const schemas = useContext(SchemaContext)();
 
   return (
-    <Box bg="gray.100" minH="100vh" w="100%" overflow="visible">
+    <Box bg="gray.100" minH="100%" minW="100%" w="fit-content">
       <Box
         position="fixed"
         left={0}
@@ -22,6 +22,8 @@ export default function Layout({ children }) {
         bg="brand.600"
         color="white"
         overflow="auto"
+        zIndex={100}
+        shadow="md"
       >
         <Box fontSize={40} mb={6} w="100%" textAlign="center">
           <Link to="/">{plugins.components["Layout::title"]}</Link>
