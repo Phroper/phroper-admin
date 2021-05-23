@@ -37,10 +37,6 @@ const displayFormatter = {
       if (v[s.display] != null) return String(v[s.display]);
       return "-";
     }
-    if (v && typeof v === "object" && s.model && s.model.display) {
-      if (v[s.model.display] != null) return String(v[s.model.display]);
-      return "-";
-    }
     if (v == null) return "-";
     return String(v);
   },

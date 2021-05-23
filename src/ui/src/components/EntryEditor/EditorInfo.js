@@ -34,7 +34,7 @@ const InfoField = connect(function ({ name, value, formik, schema, ...props }) {
               return moment(new Date(v)).format("YYYY-MM-DD HH:mm:ss");
             else if (v && schema.type === "timestamp")
               return moment(new Date(v)).format("YYYY-MM-DD HH:mm:ss");
-            else if (v && typeof v === "object") return v[schema.model_display];
+            else if (v && typeof v === "object") return v[schema.display];
             else if (v != null) return v;
             else return "-";
           })()}
