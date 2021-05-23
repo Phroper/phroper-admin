@@ -62,7 +62,7 @@ export default function ListEntries({ schema }) {
         contentHandler.runStatus(contentApi.get("count"))
       );
       if (count == null) return;
-      setEntryCount(1000);
+      setEntryCount(count);
       contentHandler.run(
         contentApi.list({ _limit: 100, _start: (page - 1) * 100 })
       );
