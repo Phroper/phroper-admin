@@ -10,9 +10,6 @@ class PhroperAdmin {
     public static function initialize() {
         Phroper::registerInitialization(function () {
             $router = Phroper::instance()->router;
-
-            error_log("register_admin");
-
             $router->add("/admin/", "PhroperAdmin\\AdminRouter");
             $router->addServeFolder("/static/", implode(DIRECTORY_SEPARATOR, [__DIR__, "ui", "build", "static"]));
             $router->addServeFolder("/admin/", implode(DIRECTORY_SEPARATOR, [__DIR__, "ui", "build"]));
