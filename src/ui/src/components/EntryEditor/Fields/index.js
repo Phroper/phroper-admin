@@ -3,9 +3,10 @@ import {
   FormLabel,
   GridItem,
   Input,
+  Text,
   Textarea,
 } from "@chakra-ui/react";
-import { connect, Field } from "formik";
+import { connect, ErrorMessage, Field } from "formik";
 import React from "react";
 import Bool from "./Bool";
 import DatePicker from "./DatePicker";
@@ -14,6 +15,7 @@ import EmbeddedObject from "./EmbeddedObject";
 import Enum from "./Enum";
 import FileMulti from "./FileMulti";
 import FileOne from "./FileOne";
+import Json from "./Json";
 import RelationOne from "./RelationOne";
 
 function ConnectSchemaField(EditComponent, addProps = null) {
@@ -33,11 +35,8 @@ function ConnectSchemaField(EditComponent, addProps = null) {
             lg: Math.min(2, grid[0]),
             "2xl": Math.min(3, grid[0]),
           }}
-          rowSpan={{
-            sm: 1,
-            lg: Math.min(2, grid[1]),
-            "2xl": Math.min(3, grid[1]),
-          }}
+          rowSpan={grid[1]}
+          minH={`${2.5 + (grid[1] - 1) * 4}em`}
           h="100%"
         >
           <FormControl minW="20%" h="100%" display="flex" flexDir="column">
@@ -54,6 +53,7 @@ function ConnectSchemaField(EditComponent, addProps = null) {
               {...props}
               {...(addProps || {})}
             />
+            <ErrorMessage component={Text} color="red.500" name={schema.key} />
           </FormControl>
         </GridItem>
       )
@@ -77,4 +77,5 @@ export const FieldComponentMap = {
   date: ConnectSchemaField(DatePicker),
   datetime: ConnectSchemaField(DatePicker),
   timestamp: ConnectSchemaField(DatePicker),
+  json: ConnectSchemaField(Json),
 };

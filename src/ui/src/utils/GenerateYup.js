@@ -22,6 +22,11 @@ export default function GenerateYup(schema) {
           })
         );
         break;
+      case "json":
+        fieldSchema = yup
+          .mixed()
+          .test("has-no-error", (v) => !(v instanceof Error));
+        break;
       default:
         break;
     }
