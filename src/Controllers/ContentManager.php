@@ -21,16 +21,14 @@ class ContentManager extends Controller {
 
     public function findOne($params, $next) {
         $model = Phroper::model($params["model"]);
-        $uiInfo = $model->getUiInfo();
-        if (!$uiInfo)
+        if (!$model->getUiInfo())
             throw new Exception("Using this model is not allowed", 403);
-        return $model->findOne([$model->getPrimaryField() => $params['id']]);
+        return $model->findOne($params['id']);
     }
 
     public function find($params) {
         $model = Phroper::model($params["model"]);
-        $uiInfo = $model->getUiInfo();
-        if (!$uiInfo)
+        if (!$model->getUiInfo())
             throw new Exception("Using this model is not allowed", 403);
         return $model->find($_GET);
     }
@@ -50,7 +48,7 @@ class ContentManager extends Controller {
         if (!$uiInfo || !$uiInfo["editable"])
             throw new Exception("Using this model is not allowed", 403);
         $data = json_load_body();
-        return $model->update([$model->getPrimaryField() => $params['id']], $data);
+        return $model->update($params['id'], $data);
     }
 
     public function delete($params, $next) {
@@ -58,14 +56,13 @@ class ContentManager extends Controller {
         $uiInfo = $model->getUiInfo();
         if (!$uiInfo || !$uiInfo["editable"])
             throw new Exception("Using this model is not allowed", 403);
-        return $model->delete([$model->getPrimaryField() => $params['id']]);
+        return $model->delete($params['id']);
     }
 
     public function count($params) {
         $model = Phroper::model($params["model"]);
-        $uiInfo = $model->getUiInfo();
-        if (!$uiInfo)
+        if (!$model->getUiInfo())
             throw new Exception("Using this model is not allowed", 403);
-        return $model->count(null);
+        return $model->count($_GET);
     }
 }

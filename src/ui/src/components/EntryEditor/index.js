@@ -147,7 +147,7 @@ function FormikWrapper({
           isCreating ? contentApi.create(data) : contentApi.update(data, id)
         );
         if (!result) return;
-        if (isCreating) {
+        if (result[schema.primary] !== id) {
           history.replace("./" + result[schema.primary]);
         }
       }}
