@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useLocalStorage from "../utils/useLocalStorage";
 import useRequest from "../utils/useRequest";
 
@@ -9,8 +9,21 @@ export function AuthBackend({ children }) {
     user: null,
     jwt: null,
   });
-
   const request = useRequest("/../api/auth", authState.jwt);
+
+  // Validating token data
+  const [tokenChecked, setTokenChecked] = useState(false);
+  useEffect(() => {
+    if (!authState.jwt) return;
+    request
+      .get("me")
+      .then((r) =>
+        setAuthState((s) => ({ user: r ? r : null, jwt: r ? s.jwt : null }))
+      )
+      .catch((e) => setAuthState({ user: null, jwt: null }))
+      .then(() => setTokenChecked(true));
+    //eslint-disable-next-line
+  }, [!!authState.jwt]);
 
   const logout = useCallback(
     function () {
@@ -71,7 +84,7 @@ export function AuthBackend({ children }) {
         register,
       }}
     >
-      {children}
+      {tokenChecked && children}
     </AuthConext.Provider>
   );
 }
