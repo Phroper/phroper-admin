@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 
 export default function Json({ value, formik, name, onBlur, onFocus }) {
-  console.log(formik);
   const [textValue, setTextValue] = useState(JSON.stringify(value, null, 2));
   const [hasError, setHasError] = useState(false);
   const setValue = formik.setFieldValue;
