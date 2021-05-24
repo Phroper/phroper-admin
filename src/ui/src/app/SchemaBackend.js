@@ -11,7 +11,7 @@ export default function SchemaBackend({ children }) {
   const schemaHandler = useRequestRunner(schemaApi.list, null);
   const auth = useContext(AuthConext);
   //eslint-disable-next-line
-  useEffect(schemaHandler.run, [auth.user]);
+  useEffect(() => auth.jwt && schemaHandler.run(), [auth.jwt]);
 
   const displayLoading =
     schemaHandler.isLoading ||
