@@ -13,17 +13,17 @@ export default function PageRouting() {
   return (
     <Switch>
       <Route path="/login" component={Login} />
-      <Route path="/content-type/:model" component={ContentType} />
-      <>
-        {plugins.routes.map((r, i) => (
-          <Route {...r} key={r.path} />
-        ))}
-      </>
+      {!auth.user &&
+        plugins.routes
+          .filter((r) => r && r.without_login)
+          .map((r, i) => <Route {...r} key={r.path} />)}
       {!auth.user && (
-        <Route>
-          <Redirect to="/login" />
-        </Route>
+        <Route render={() => <Redirect path="*" to="/login" />}></Route>
       )}
+      {auth.user && (
+        <Route path="/content-type/:model" component={ContentType} />
+      )}
+      {auth.user && plugins.routes.map((r, i) => <Route {...r} key={r.path} />)}
     </Switch>
   );
 }

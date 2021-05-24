@@ -14,7 +14,11 @@ export function AuthBackend({ children }) {
   // Validating token data
   const [tokenChecked, setTokenChecked] = useState(false);
   useEffect(() => {
-    if (!authState.jwt) return;
+    if (!authState.jwt) {
+      setTokenChecked(true);
+      return;
+    }
+
     request
       .get("me")
       .then((r) =>
