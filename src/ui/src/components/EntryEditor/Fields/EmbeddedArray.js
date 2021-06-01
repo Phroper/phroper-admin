@@ -9,6 +9,7 @@ import {
   Button,
   HStack,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import EmbeddedEditor from "./EmbeddedEditor";
 
 export default function EmbeddedArray({
@@ -23,9 +24,15 @@ export default function EmbeddedArray({
   let value = formik.values[name];
   value = Array.isArray(value) ? value : [];
 
+  const [expandedIndex, setExpandedIndex] = useState(-1);
+
   return (
     <Box pl={3} borderLeft="1px solid" borderColor="brand.500">
-      <Accordion allowToggle>
+      <Accordion
+        allowToggle
+        index={expandedIndex}
+        onChange={(index) => setExpandedIndex(index)}
+      >
         {value.map((v, i) => (
           <AccordionItem key={i}>
             <h2>
@@ -109,7 +116,10 @@ export default function EmbeddedArray({
         colorScheme="brand"
         variant="ghost"
         fontSize="3xl"
-        onClick={() => formik.setFieldValue(`${name}[${value.length}]`, null)}
+        onClick={() => {
+          formik.setFieldValue(`${name}[${value.length}]`, null);
+          setExpandedIndex(value.length);
+        }}
       >
         +
       </Button>
