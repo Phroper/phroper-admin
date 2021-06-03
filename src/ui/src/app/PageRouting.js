@@ -18,7 +18,10 @@ export default function PageRouting() {
           .filter((r) => r && r.without_login)
           .map((r, i) => <Route {...r} key={r.path} />)}
       {!auth.user && (
-        <Route render={() => <Redirect path="*" to="/login" />}></Route>
+        <Route
+          path="/"
+          render={() => <Redirect path="*" to="/login" />}
+        ></Route>
       )}
       {auth.user && (
         <Route path="/content-type/:model" component={ContentType} />
