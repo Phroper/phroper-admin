@@ -31,7 +31,7 @@ class ContentSchema extends Controller {
                     $models[] = basename($file, ".json");
             }
         }
-        $list = Phroper::getCachedTypes();
+        $list = Phroper::instance()->injector->listTypes();
         foreach ($list as $model) {
             if (!str_starts_with($model, "Models\\")) continue;
             $models[] = (substr($model, 7));
