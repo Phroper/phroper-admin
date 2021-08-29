@@ -8,7 +8,7 @@ class PhroperAdmin {
     public static array $plugins = [];
 
     public static function initialize() {
-        Phroper::registerInitialization(function () {
+        Phroper::addInitializer(function () {
             $router = Phroper::instance()->router;
             $router->add("/admin/", "PhroperAdmin\\AdminRouter");
             $router->addServeFolder("/static/", implode(DIRECTORY_SEPARATOR, [__DIR__, "ui", "build", "static"]));

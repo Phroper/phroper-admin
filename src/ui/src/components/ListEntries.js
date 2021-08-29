@@ -65,7 +65,11 @@ export default function ListEntries({ schema }) {
       if (count == null) return;
       setEntryCount(count);
       contentHandler.run(
-        contentApi.list({ _limit: 100, _start: (page - 1) * 100 })
+        contentApi.list({
+          _limit: 100,
+          _start: (page - 1) * 100,
+          _sort: schema.sort,
+        })
       );
     })();
     //eslint-disable-next-line
