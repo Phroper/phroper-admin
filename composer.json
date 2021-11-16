@@ -10,7 +10,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.4.0",
-    "apisc/phroper": "dev-master"
+    "apisc/phroper": "dev-php-7.4"
   },
   "autoload": {
     "psr-4": {
